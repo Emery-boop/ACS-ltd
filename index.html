@@ -103,14 +103,16 @@
             padding: 0 20px;
         }
 
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         .logo {
             height: 60px;
             display: flex;
             align-items: center;
-            font-weight: 700;
-            font-size: 1.8rem;
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
             transition: var(--transition);
         }
 
@@ -125,8 +127,33 @@
             height: 45px;
         }
 
-        .logo span {
-            color: var(--secondary);
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+            line-height: 1.2;
+            transition: var(--transition);
+        }
+
+        .scrolled .company-name {
+            color: var(--primary);
+        }
+
+        .rc-number {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .scrolled .rc-number {
+            color: rgba(13, 45, 98, 0.8);
         }
 
         .nav-menu {
@@ -704,7 +731,6 @@
             
             .logo {
                 height: 50px;
-                font-size: 1.6rem;
             }
             
             .mobile-close {
@@ -719,6 +745,14 @@
             .scrolled .nav-menu {
                 top: 70px; /* Adjust for scrolled header height */
                 height: calc(100vh - 70px);
+            }
+            
+            .company-name {
+                font-size: 1.2rem;
+            }
+            
+            .rc-number {
+                font-size: 0.7rem;
             }
         }
 
@@ -738,11 +772,22 @@
             .logo {
                 height: 100px;
                 width: 100;
-                font-size: 3.5rem;
             }
             
             .hero p {
                 font-size: 1rem;
+            }
+            
+            .logo-container {
+                gap: 10px;
+            }
+            
+            .company-name {
+                font-size: 1rem;
+            }
+            
+            .rc-number {
+                font-size: 0.6rem;
             }
         }
     </style>
@@ -751,9 +796,15 @@
     <!-- Header with Fixed Navigation -->
     <header id="header">
         <div class="container header-container">
-            <a href="#home" class="logo">
-                <img src="acs-removebg-preview (1).png" alt="AL-MAGTHAS Logo" class="logo-image">
-            </a>
+            <div class="logo-container">
+                <a href="#home" class="logo">
+                    <img src="acs-removebg-preview (1).png" alt="AL-MAGTHAS Logo" class="logo-image">
+                </a>
+                <div class="company-info">
+                    <div class="company-name">AL-MAGTHAS</div>
+                    <div class="rc-number">RC:2020013</div>
+                </div>
+            </div>
             <div class="mobile-toggle" id="mobileToggle">
                 <i class="fas fa-bars"></i>
             </div>
@@ -1082,7 +1133,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 AL-MAGTHAS Corporate Services Ltd. All rights reserved.</p>
+                <p>&copy; 2023 AL-MAGTHAS Corporate Services Ltd. All rights reserved. RC:2020013</p>
             </div>
         </div>
     </footer>
