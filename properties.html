@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings | AL-MAGTHAS Corporate Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d2d62;      /* Deep Navy Blue */
+            --secondary: #c42034;    /* Rich Crimson Red */
+            --accent: #ffffff;       /* Pure White */
+            --light: #f0f4f8;        /* Light blue-gray background */
+            --dark: #0a1a36;         /* Dark blue for text */
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--light);
+            padding-top: 80px; /* Added padding to prevent content behind header */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background: #a31b2d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0d2d62;
+        }
+
+        /* Header - Fixed Navigation */
+        header {
+            background: var(--accent);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            transition: var(--transition);
+        }
+
+        .nav-menu li {
+            margin-left: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-menu a.active {
+            color: var(--secondary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+            z-index: 1001;
+        }
+
+        /* Hero Section for Properties Page */
+        .hero-properties {
+            background: linear-gradient(rgba(13, 45, 98, 0.85), rgba(13, 45, 98, 0.85)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-properties .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-properties h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-properties p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Property Filters */
+        .property-filters {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .filters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .filter-group select, 
+        .filter-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-group .range-slider {
+            width: 100%;
+            height: 5px;
+            margin-top: 10px;
+            background: #ddd;
+            border-radius: 5px;
+        }
+
+        .filter-group .range-slider .thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            position: relative;
+            top: -8px;
+            cursor: pointer;
+        }
+
+        .filter-group .range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Featured Properties */
+        .properties-listing {
+            background: var(--light);
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .property-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .property-content {
+            padding: 25px;
+        }
+
+        .property-price {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .property-address {
+            color: var(--gray);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .property-address i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+
+        .property-description {
+            margin-bottom: 20px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .feature i {
+            color: var(--secondary);
+            margin-right: 5px;
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .property-actions .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Property Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .pagination button:hover,
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-properties h1 {
+                font-size: 2.8rem;
+            }
+            
+            .property-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background: white;
+                width: 280px;
+                height: calc(100vh - 80px);
+                flex-direction: column;
+                padding: 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 10px 0;
+                font-size: 1.1rem;
+                color: var(--dark);
+            }
+            
+            .hero-properties h1 {
+                font-size: 2.3rem;
+            }
+            
+            .filters-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-properties h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                height: 100px;
+                width: 100;
+                font-size: 3.5rem;
+            }
+            
+            .hero-properties p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Fixed Navigation -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="acs-removebg-preview (1).png" alt="AL-MAGTHAS Logo" class="logo-image">
+            </a>
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="properties.html" class="active">Properties</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section for Properties Page -->
+    <section class="hero-properties">
+        <div class="container hero-content">
+            <h1>Premium Property Listings</h1>
+            <p>Discover exceptional residential and commercial properties with AL-MAGTHAS</p>
+            <a href="#property-listings" class="btn btn-primary">Browse Listings</a>
+        </div>
+    </section>
+
+    <!-- Property Listings Section -->
+    <section class="properties-listing" id="property-listings">
+        <div class="container">
+            <div class="section-title">
+                <h2>Available Properties</h2>
+                <p>Find your perfect property from our curated selection</p>
+            </div>
+            
+            <!-- Property Filters -->
+            <div class="property-filters">
+                <h3>Filter Properties</h3>
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="property-type">Property Type</label>
+                        <select id="property-type">
+                            <option value="all">All Types</option>
+                            <option value="house">House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="villa">Villa</option>
+                            <option value="commercial">Commercial</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price-range">Price Range</label>
+                        <div class="range-slider">
+                            <div class="thumb" style="left: 30%;"></div>
+                        </div>
+                        <div class="range-values">
+                            <span>$100,000</span>
+                            <span>$2,500,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <select id="bedrooms">
+                            <option value="any">Any</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="all">All Statuses</option>
+                            <option value="sale">For Sale</option>
+                            <option value="rent">For Rent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="all">All Locations</option>
+                            <option value="downtown">Downtown</option>
+                            <option value="bay-area">Bay Area</option>
+                            <option value="suburbs">Suburbs</option>
+                            <option value="countryside">Countryside</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Property Grid -->
+            <div class="property-grid">
+                <!-- Property 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Luxury Villa">
+                        <div class="property-badge">For Sale</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$1,250,000</div>
+                        <h3 class="property-title">Modern Luxury Villa</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 24 Park Avenue, Downtown
+                        </div>
+                        <p class="property-description">Stunning contemporary villa with panoramic views, spacious interiors and premium finishes. Perfect for families seeking luxury living.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 4 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 3 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 3200 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Waterfront Apartment">
+                        <div class="property-badge">For Rent</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$4,500/mo</div>
+                        <h3 class="property-title">Waterfront Apartment</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 180 Ocean Drive, Bay Area
+                        </div>
+                        <p class="property-description">Luxury apartment with breathtaking ocean views, modern amenities and resort-style living. Includes access to private beach and pool.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 3 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 2 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 1800 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Downtown Penthouse">
+                        <div class="property-badge">For Sale</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$2,350,000</div>
+                        <h3 class="property-title">Downtown Penthouse</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 88 Skyline Tower, Downtown
+                        </div>
+                        <p class="property-description">Exclusive penthouse with panoramic city views, private terrace and designer finishes. Perfect for urban professionals.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 3 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 3.5 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 3500 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 4 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Country Estate">
+                        <div class="property-badge">For Sale</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$3,850,000</div>
+                        <h3 class="property-title">Country Estate</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 45 Hillside Road, Countryside
+                        </div>
+                        <p class="property-description">Magnificent country estate on 5 acres with pool, tennis court, and guest house. Perfect for large families and entertaining.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 6 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 5.5 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 6200 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 5 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Urban Loft">
+                        <div class="property-badge">For Rent</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$3,200/mo</div>
+                        <h3 class="property-title">Urban Loft</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 77 Industrial Street, Downtown
+                        </div>
+                        <p class="property-description">Converted industrial loft with exposed brick, high ceilings, and modern design. Located in the heart of the arts district.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 2 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 2 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 1600 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 6 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Lakeside Cottage">
+                        <div class="property-badge">For Sale</div>
+                    </div>
+                    <div class="property-content">
+                        <div class="property-price">$895,000</div>
+                        <h3 class="property-title">Lakeside Cottage</h3>
+                        <div class="property-address">
+                            <i class="fas fa-map-marker-alt"></i> 112 Lakeview Drive, Countryside
+                        </div>
+                        <p class="property-description">Charming cottage with private lake access, dock, and beautiful sunset views. Perfect weekend getaway or retirement home.</p>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 3 Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i> 2 Baths
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i> 1800 sqft
+                            </div>
+                        </div>
+                        <div class="property-actions">
+                            <button class="btn">View Details</button>
+                            <button class="btn btn-primary">Schedule Tour</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>AL-MAGTHAS Corporate</h3>
+                    <p>Your trusted partner in premium real estate development and management services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                         <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="properties.html">Properties</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Estate Development</a></li>
+                        <li><a href="#">Estate Management</a></li>
+                        <li><a href="#">Property Consultancy</a></li>
+                        <li><a href="#">Property Valuation</a></li>
+                        <li><a href="#">Real Estate Investment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive updates on new properties and market insights.</p>
+                    <div class="form-group">
+                        <input type="email" id="newsletterEmail" placeholder="Your Email Address">
+                        <button class="btn" style="width: 100%; margin-top: 10px;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AL-MAGTHAS Corporate Services Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Property Card Interactions
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('btn')) {
+                    const propertyTitle = card.querySelector('.property-title').textContent;
+                    alert(`Property details for "${propertyTitle}" would be shown in a modal or dedicated page`);
+                }
+            });
+        });
+        
+        // Newsletter subscription
+        const newsletterBtn = document.querySelector('.footer-column .btn');
+        if (newsletterBtn) {
+            newsletterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('newsletterEmail').value;
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing to our newsletter!');
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
+        }
+        
+        // Filter functionality
+        const filterSelects = document.querySelectorAll('.filter-group select');
+        filterSelects.forEach(select => {
+            select.addEventListener('change', () => {
+                alert('Filters would be applied to show matching properties in a real implementation');
+            });
+        });
+        
+        // Pagination buttons
+        const paginationButtons = document.querySelectorAll('.pagination button');
+        paginationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                paginationButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
