@@ -1040,10 +1040,22 @@
     <!-- Include Supabase JS library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Initialize Supabase client
-        const supabaseUrl = 'https://vetpmzhcnmunmfvgfjbn.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZldHBtemhjbm11bm1mdmdmamJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2OTM0MjIsImV4cCI6MjA2OTI2OTQyMn0.HMKdio5tjf5SmxS7nd-6qRwiVg2pO8fWG0c46D5L6fM';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Initialize Supabase
+const supabaseUrl = 'https://mzpuskqerbpaadisvbjh.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16cHVza3FlcmJwYWFkaXN2YmpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3MTg3NzQsImV4cCI6MjA2OTI5NDc3NH0.cNO-p2bBDdfxamYg71fXpssuIvbkVTEQMx2uVIkdP1M';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Example function to load Lagos properties
+async function loadLagosProperties() {
+  const { data, error } = await supabase
+    .from('properties')
+    .select('*')
+    .eq('location', 'lekki')
+    .order('price_numeric', { ascending: false });
+  
+  if (error) console.error('Error:', error);
+  else return data;
+}
 
         // DOM Elements
         const adminBtn = document.getElementById('adminBtn');
