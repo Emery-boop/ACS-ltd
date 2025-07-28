@@ -1093,8 +1093,11 @@
             adminClose.addEventListener('click', closeAdminPanel);
             btnCancel.addEventListener('click', closeAdminPanel);
             
-            // Save property
-            btnSave.addEventListener('click', saveProperty);
+            // Save property - Fixed event listener
+            btnSave.addEventListener('click', (e) => {
+                e.preventDefault();
+                saveProperty();
+            });
             
             // Hamburger menu toggle
             hamburger.addEventListener('click', toggleMobileMenu);
@@ -1395,7 +1398,7 @@
                 closeAdminPanel();
                 showStatus(`Property "${property.title}" has been added!`, true);
             } catch (error) {
-                console.error('Error saving property:', error.message);
+                console.error('Error saving property:', error);
                 showStatus('Error saving property: ' + error.message, false);
             }
         }
@@ -1471,4 +1474,4 @@
         }
     </script>
 </body>
-</html>
+</html>  modify the currency and property type
